@@ -1,0 +1,107 @@
+.h1 {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 60px;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+
+
+.navigation {
+  font-family: sans-serif;
+  font-optical-sizing: auto;
+  font-size: 20px;
+  font-variation-settings:
+    "wdth" 100;
+  display: flex;
+  justify-content: center;
+  background-color: pink;
+  border-style: double;
+}
+
+.main-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  font-family: sans-serif;
+  font-optical-sizing: auto;
+  font-size: 20px;
+
+}
+
+
+
+.footer {
+  display: flex;
+  justify-content: center;
+  font-family: sans-serif;
+  font-optical-sizing: auto;
+  font-size: 20px;
+
+}
+
+
+
+body {
+  height: 100%;
+  background-color: rgb(244, 220, 224);
+}
+
+.champion-list {
+  display: flex;
+  flex-flow: row;
+  justify-content:center;
+}
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,tr {
+  border: solid;
+  width: 100%;
+  background-color: white;
+}
+
+.table{
+  width: 30%;
+}
+
+.rules{
+  width: 20%;
+}
+
+.title-list{
+  display: flex;
+justify-content: center;
+}
+
+.select-role{
+  width: 80%;
+}
+
+.role-section{
+  width: 20%;
+}
+
+.role-title{
+  display: flex;
+  justify-content: center;
+}
+
+.div-for-select-role{
+  display: flex;
+  justify-content: center;
+}

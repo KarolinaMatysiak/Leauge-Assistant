@@ -1,0 +1,26 @@
+Chciałabym stworzyć projekt, który będzie dodatkowym narzędziem dla niezdecydowanych lub początkujących graczy Leauge of Legends.
+Funkcje które planuje wdrożyć: 
+proste logowanie użytkowników, 
+losowanie postacie z puli bohaterów dla wybranej pozycji - rozwiązanie dla niezdecydowanych graczy,
+mozliwosc tworzenia wlasnych folderow z ulubionymi postaciami do wylosowania,
+wyswietlanie filtrowanej listy bohaterow,
+serwis odpowiedzialny za pobieranie aktualnej listy postaci z gry.
+
+
+node.js srodowisko do js (npm - node package manager)
+express.js framework do robienia api http
+baza mongo.db bo tez przechowuje dane w postaci podobnej do json i jest darmowy
+zainstalowalam npm cors 
+
+testowanie api w postmanie:
+stworzyc routa w mainie
+i potem w terminalu:
+node ./src/main.js 
+lub
+stworzyc wlasny skrypt w package.json: "start": "node ./src/main.js", 
+wejsc w : cd championsyncservice
+uruchamiany jako: npm run start
+aby zabic aplikacje w terminalu: ctrl c
+
+
+

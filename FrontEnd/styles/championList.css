@@ -1,0 +1,168 @@
+body {
+  height: 100%;
+  background-color: rgb(254, 240, 247);
+}
+
+.main-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  flex-flow: row;
+  justify-content: space-between;
+  min-height: 50px;
+  position: sticky;
+  top: 1%;
+
+  background-color: pink;
+  border-color: pink;
+  border-style: outset;
+  border-radius: 10px;
+}
+
+.nav-img {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5%;
+}
+
+.nav-img {
+  max-height: 40px;
+}
+
+.nav-nav {
+  margin-right: 0.5%;
+  font-family: sans-serif;
+  font-optical-sizing: auto;
+  font-size: 20px;
+  font-variation-settings: "wdth" 100;
+}
+
+a {
+  color: rgb(246, 251, 255);
+  text-decoration: none;
+  margin: 15px;
+  text-shadow: 1px 1px 5px grey;
+}
+
+a:hover {
+  color: rgb(173, 104, 127);
+  text-decoration: none;
+  margin: 15px;
+  text-shadow: 1px 1px 5px grey;
+}
+
+.content {
+  padding-top: 2%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+
+  font-family: sans-serif;
+  font-optical-sizing: auto;
+  font-size: 20px;
+  background-color: rgb(253, 209, 216);
+  margin: 2%;
+  border-radius: 10px;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+
+  color: rgb(173, 104, 127);
+  text-decoration: none;
+  margin: 15px;
+  text-shadow: 1px 1px 2px rgb(126, 123, 123);
+}
+
+p {
+  color: rgb(173, 104, 127);
+  margin: 1% 15% 5%;
+}
+
+.inner-content {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 3% 1%;
+}
+
+.inner-content-roles {
+  width: 30%;
+}
+
+.roles-select {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+select {
+  color: rgb(173, 104, 127);
+}
+
+.inner-content-gallery {
+  width: 30%;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap:3%;
+}
+
+.gallery-photo {
+  display: flex;
+  justify-content: center;
+}
+
+.gallery-photo:hover {
+  transform: scale(1.05);
+}
+
+.gallery-label {
+  display: block;
+  text-align: center;
+}
+
+.img-container{
+  display: flex;
+  flex-flow: column;
+}
+
+th,
+tr {
+  border: solid;
+  width: 100%;
+  background-color: white;
+  border-color: rgb(136, 81, 99);
+  border-width: 2px;
+}
+
+.champ-checkbox {
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+.role-container{
+display: flex;
+align-items: center;
+}
+
+.footer {
+  padding-top: 10px;
+  color: rgb(173, 104, 127);
+}
+
+footer {
+  width: 70%;
+  margin: 2% auto;
+  text-align: center;
+  margin-top: 2%;
+  border-top: 2px solid rgb(158, 95, 116);
+}

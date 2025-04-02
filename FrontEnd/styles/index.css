@@ -1,0 +1,121 @@
+body {
+  height: 100%;
+  background-image: url(../styles/camille-actualfactualfinal.jpg);
+  background-size: cover;
+  
+}
+
+.main-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+.main-title {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  background-color:rgb(253, 209, 216, 0.6);
+  border-radius: 5px;
+
+} 
+
+h1 {
+  font-family:'Gill Sans', 'Gill Sans MT','Trebuchet MS', sans-serif;
+  margin-top: 5%;
+  margin-bottom: 2%;
+  text-align: center;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style:normal;
+  font-size: 120px;
+  color: rgb(173, 104, 127);
+  text-shadow: 5px 3px 10px rgb(126, 123, 123);
+
+}
+
+  h2 {
+    font-size: 30px;
+    font-family:'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    margin-top: -1%;
+    margin-bottom: 5%;
+    text-align: center;
+    color: rgb(173, 104, 127);
+    text-decoration: none;
+    text-shadow: 1px 1px 2px rgb(126, 123, 123);
+  }
+
+  .nav-bar {
+    font-family:'Gill Sans', 'Gill Sans MT','Trebuchet MS', sans-serif;
+    display: flex;
+    align-items:center;
+    flex-flow: row;
+    justify-content:center;
+    min-height: 50px;
+  
+    background-color: pink;
+    border-color: pink;
+    border-radius: 5px;
+    border-style: outset;
+    position: sticky;
+    top: 1%;
+    margin-bottom: 1%;
+
+  }
+
+  
+
+  
+  a {
+    color: rgb(246, 251, 255);
+    text-decoration: none;
+    margin: 15px;
+    text-shadow: 1px 1px 5px grey;
+    font-size: 20px;
+    text-align: center;
+  }
+  
+  a:hover {
+    color: rgb(173, 104, 127);
+    text-decoration: none;
+    margin: 15px;
+    text-shadow: 5px 3px 10px rgb(126, 123, 123);
+  }
+
+
+.content {
+  margin: 1%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  text-align: center;
+
+  font-family: sans-serif;
+  font-optical-sizing: auto;
+  font-size: 20px;
+  background-color:rgb(253, 209, 216, 0.6);
+  margin: 2%;
+  border-radius: 10px;
+  
+}
+
+
+
+.footer {
+  padding-top: 1%;
+  color: rgb(173, 104, 127);
+}
+
+footer {
+  width: 70%;
+  margin: 2% auto;
+  text-align: center;
+  margin-top: 2%;
+  border-top: 2px solid rgb(158, 95, 116);
+}
+
+
+p {
+  margin:3.5% 4%;
+  font-family: sans-serif;
+}
