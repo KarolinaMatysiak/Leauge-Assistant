@@ -1,5 +1,3 @@
-
-let championJson = {};
 let championRoles;
 
 //funkcja odpowiedzialna za filtrowanie postaci
@@ -14,7 +12,7 @@ async function championFilter(event)
 }
 
 //odpalanie funkcji
-fetch('http://localhost:3000/champions').then(response => response.json())
+  fetch('http://localhost:3000/champions').then(response => response.json())
   .then((championJson) => {
     championRoles = [...new Set(championJson.flatMap((x) => x.tags))];
 

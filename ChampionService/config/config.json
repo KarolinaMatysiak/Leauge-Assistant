@@ -1,0 +1,14 @@
+{
+  "development": {
+    "dialect": "sqlite",
+    "storage": "./roulette.db"
+  },
+  "test": {
+   "dialect": "sqlite",
+    "storage": "./roulette.db"
+  },
+  "production": {
+   "dialect": "sqlite",
+    "storage": "./roulette.db"
+  }
+}

@@ -8,7 +8,7 @@ serwis odpowiedzialny za pobieranie aktualnej listy postaci z gry.
 
 
 node.js srodowisko do js (npm - node package manager)
-express.js framework do robienia api http
+express.js framework do robienia api, routing i middleware framework 
 baza mongo.db bo tez przechowuje dane w postaci podobnej do json i jest darmowy
 zainstalowalam npm cors 
 
@@ -23,4 +23,115 @@ uruchamiany jako: npm run start
 aby zabic aplikacje w terminalu: ctrl c
 
 
+Czym jest routing?
+routing okresla jaki response zwroci aplikacja na okreslony request uzytkownika (URL path + HTTP request method (get,post..))
+router przekierowuje do jakiego kontrolera ma trafic przychodzacy request
 
+taki ma zapis: app.METODA(PATH,FUNCTION)
+
+app - instancja express()
+metoda - http request (get,post..), mowi sie na nie routing methods
+path - sciezka na serwerze (np. /costam ), w polaczeniu z routing method mowi sie na nia endpoint
+function - funkcja ktora ma byc odpalona gdy path bedzie pasowac, mowi sie na nią handler albo callback function
+
+jesli chcesz uzyc kilku funkcji do obsulzenia requesta to trzeba podac next jako argument w callback funkcji
+i wywolac next() na koncu aby oddac kontrole nastepnej funkcji 
+
+
+aby zbierac parametry z path, po prostu dajesz dwukropek w path i potem korzystasz z req.params:
+/users/:userId/books/:bookId
+
+warto tworzyc chainable routes z uzyciem route(), przyklad:
+app.route('/book')
+.get(funkcja bla bla bla)
+.post(funkcja bla bla bla)
+.itd
+
+
+express.Router() - middleware i routing system w jednym
+
+
+Czym są kontrolery?
+kontrolery przechowuja cała logike odpowiedzialna za przetwarzanie requestow i przygotowywanie responsow. Wrzucamy tam funkcje ktore 
+potem sa wykorzystywane przez routes, aby zachowac porzadek
+
+Czym jest Middlewear?
+ogolna definicja: oprogramowanie umieszczane pomiedzy dwoma innymi systemami, umozliwiajace ich komunikacje. Umozliwia wymiane danych
+dokonujac ich konwersji, czyli pozwala na dowolne laczenie niepowiazanych do rozwiazan informatycznych.
+Przyklad: aplikacja sklep korzysta z oddzielnego oprogramowania obslugujacego platnosci i oddzielnego oprogramowania
+obslugujacego dostawy 
+
+definicja w kontekscie http: warstwa posrednia ktora jest wykonywana miedzy czasem odebrania requestu a zwroceniem response
+
+funkcje middlewear odpowiadaja za:
+-uruchamianie jakiegos fragmentu kodu
+-wprowadzanie zmian w obiektach requesta i responsa 
+-zakanczanie request-response cycle
+-wywolywanie kolejnej middleware funkcji w stacku
+
+typy middlewear funkcji:
+-application-level (dziala na poziomie calej apki, dziala dla wszystkich tras)
+-routner-level (uzywasz express.Router(), dziala tylko dla okreslonych tras)
+-error-handling (przekazujesz 4 argumenty)
+-build-in (np. express.json(), express.utlencoded({extended:true})-parsowanie danych z formularza)
+-third-party (zewnetrzne biblioteki instalowane przez npm)
+
+przykladowy zapis app lvl:
+const express = require('express')
+const app = express()
+
+app.use(blabla)
+
+
+
+
+
+Wazne informacje dotyczace architektury:
+
+HTTP- Hyper Text Transfer Protocol, protokol okreslajacy zbior zasad odnosnie komunikacji miedzy klientem a serwerem sieci WWW,
+np stgosowanie kodow odpowiedzi (200,404 etc), zapisywanie daty w formacie ISO 8601 (w js mozna uzyc metody toISOString())
+HTTPS - -=-, szyfrowana wersja http (secure)
+
+metody HTTP:
+get - pobieranie info o zasobach
+post - tworzenie nowych zasobow na serwerze 
+put - idempotenta metoda post, czyli jesli dostanie dwa takie same zapytania zwroci 2x identyczne zasoby, post nie musi tak robic
+patch - aktualizowanie cech zasobu
+delete - usuwanie zasobu
+
+
+
+
+
+API-application programming interface, to zestaw regul opisujacych komunikacje miedzy komputerami lub czlowiekiem a systemem,
+definiuje w jaki sposob uzytkownik moze uzyskac dostep do zasobow lub w jakiej postaci je otrzyma
+
+REST API- representional state transfer API, to styl architektury oprogramowania, definiujacy reguly nadajace ksztalt api, pozwala
+na wymiane danych miedzy roznymi aplikacjami nie wiedzac jak one dzialaja od srodka, glowne cechy: proste, skalowane, stateless
+zasady rest:
+-requesty i responsy musza zawierac okreslony komplet informacji i nie mogą ingerowac w siebie nawzajem
+-stateless: serwer nie przechowuje stanu o sesji uzytkownika
+-wykorzystanie cache: pozwala na szybsze zwrocenie odpowiedzi w przypadku powtarzajacych sie zapytan
+-ma zawierac endpointy, aby wskazywac adresy zasobow i jaka akcja zostanie wykonana 
+-separacja warstw: zadna z warstw nie powinna bezposrednio oddzialywac na inne warstw, implementacje warstw i zewnetrznych api
+powinny byc ukryte przed klientem
+-mozliwosc udostepniania uzytkownikom skryptow wykonywalnych: opcjonalna regula, czesto pomijana
+
+URI - Uniform Resource Identifier, identyfikator zasobu
+URL - Uniform Resource Locator, definiuje jak uzyskac dostep do zasobu za pomoca internetu,zawiera
+ -path params(parametry sciezki): to konieczny do podania parametr przez strukture API, ale nie zawsze musi byc winnych przypadkach
+ -query params(parametry zapytania): wystepuja po znaku ? i odzielane są &, to dodatkowe parametry
+
+ ROD- Resource orientated design, styl projektowania api wymyslony przez google
+    zasady rod:
+    -nazwa zasobu ma byc unikalna i wyrazana w l.mnogiej, np /customers
+    -id zasobu w sciezce musi byc po nazwie kolekcji, np /customers/123
+    -kazdy zasob musi byc jednoznacznie identyfikiowalny 
+    -rekomendowane jest identyfikowanie zasobow po nazwie 
+    -nazwy kolekcji w jezyku ang i camelCase
+    -sciezka zasobu powinna uwzgledniac relacje miedzy zasobami, czyli wskazywac na hierarchie zasobow w systemie,
+     np /customers/123/carts/456
+
+
+
+uzywam sqlite bazy
