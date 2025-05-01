@@ -1,4 +1,6 @@
+const { Op } = require('sequelize');
 const Champion = require('../../models/champion'); // ścieżka do modelu
+const ChampionTag = require('../../models/championTag');
 
 
 async function updateChampions(req,res)
@@ -7,12 +9,20 @@ async function updateChampions(req,res)
     const champions = await getLatestDDragon();
 
     for (const champ of champions) {
-      await Champion.findOrCreate({
+      const champion = await Champion.findOrCreate({
         where: { name: champ.name },
         defaults: {
-          imgUrl: champ.image
+          imgUrl: champ.image,
         }
       });
+
+      const insertedChampionId = champion[0]?.id;
+      for (const tag of champ.tags) {
+        await ChampionTag.findOrCreate({
+          where: {championId: insertedChampionId, tag: tag.toLowerCase()
+           },
+        })
+      }
     }
 
     res.status(200).send("Championi zaktualizowani");
@@ -25,16 +35,17 @@ async function updateChampions(req,res)
 
 async function getChampions(req,res){
   try {
-    const roles = req.query.roles;
+    const roles = req.query.roles?.map(role => role.toLowerCase());
 
-    let champions = await Champion.findAll();
-
-    if (Array.isArray(roles) && roles.length) {
-      champions = champions.filter(champ => {
-        const tags = JSON.parse(champ.tags || "[]");
-        return tags.some(tag => roles.includes(tag));
-      });
-    }
+    let champions = await Champion.findAll({
+      include: [{
+        model: ChampionTag,
+        where: roles?.length ? {
+          tag: {
+            [Op.in]: roles
+          }} : undefined,
+      }]  
+    });
 
     res.send(champions);
   } catch (err) {

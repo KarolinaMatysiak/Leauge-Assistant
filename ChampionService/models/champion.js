@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../src/connections/db-connection');
+const ChampionTag = require('./championTag')
 
 const Champion = sequelize.define('Champion', {
   name: {

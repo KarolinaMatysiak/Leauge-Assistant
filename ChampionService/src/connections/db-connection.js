@@ -1,10 +1,15 @@
 const { Sequelize } = require('sequelize');
 
+
 //konstruktor
 const sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: './roulette.db'
   });
+
+
+
+
 
 async function initConnection(){
     try {
@@ -14,6 +19,8 @@ async function initConnection(){
         console.error('Unable to connect to the database:', error);
       }
   }
+
+
 
   
 
