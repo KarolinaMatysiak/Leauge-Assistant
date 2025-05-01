@@ -4,7 +4,6 @@ const Champion = require('../../models/champion'); // ścieżka do modelu
 async function updateChampions(req,res)
 {
   try {
-    let roles = req.query.roles;
     const champions = await getLatestDDragon();
 
     for (const champ of champions) {
@@ -16,11 +15,25 @@ async function updateChampions(req,res)
       });
     }
 
+    res.status(200).send("Championi zaktualizowani");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Błąd podczas aktualizacji championów");
+  }
+}
+
+
+async function getChampions(req,res){
+  try {
+    const roles = req.query.roles;
+
+    let champions = await Champion.findAll();
+
     if (Array.isArray(roles) && roles.length) {
-      const filteredChampions = champions.filter(champ =>
-        champ.tags.some(tag => roles.includes(tag))
-      );
-      return res.send(filteredChampions);
+      champions = champions.filter(champ => {
+        const tags = JSON.parse(champ.tags || "[]");
+        return tags.some(tag => roles.includes(tag));
+      });
     }
 
     res.send(champions);
@@ -28,11 +41,6 @@ async function updateChampions(req,res)
     console.error(err);
     res.status(500).send("Błąd podczas pobierania championów");
   }
-}
-
-
-async function getChampions(req,res){
-const championsList =
 }
 
 
@@ -66,4 +74,4 @@ async function getLatestDDragon() {
 
 
 
-module.exports={updateChampions}
+module.exports={updateChampions, getChampions}
