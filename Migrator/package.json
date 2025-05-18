@@ -1,0 +1,15 @@
+{
+  "name": "migrator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "migration" : "npx sequelize-cli db:migrate"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7"
+  }
+}

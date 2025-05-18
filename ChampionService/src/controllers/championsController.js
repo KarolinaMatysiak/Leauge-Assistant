@@ -1,9 +1,19 @@
 const { Op } = require('sequelize');
 const Champion = require('../../models/champion'); // ścieżka do modelu
 const ChampionTag = require('../../models/championTag');
+const CronJob =require('cron').CronJob;
+
+const job = new CronJob(
+'0 22 * * *',
+updateChampions,
+null,
+true,
+'Europe/Warsaw');
+job.start()
 
 
-async function updateChampions(req,res)
+
+async function updateChampions()
 {
   try {
     const champions = await getLatestDDragon();
@@ -25,10 +35,9 @@ async function updateChampions(req,res)
       }
     }
 
-    res.status(200).send("Championi zaktualizowani");
+   console.log('championi zaktualizowani')
   } catch (err) {
     console.error(err);
-    res.status(500).send("Błąd podczas aktualizacji championów");
   }
 }
 
