@@ -136,3 +136,5 @@ URL - Uniform Resource Locator, definiuje jak uzyskac dostep do zasobu za pomoca
 
 uzywam sqlite bazy
 uzywam crona do codziennego synchronizowania champow
+
+uzywam dotenv

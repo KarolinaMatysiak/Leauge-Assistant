@@ -60,7 +60,7 @@ async function signIn(req, res) {
     if (result)
     {
      
-const token = jwt.sign({ foo: 'bar' }, 'shhhhh',  { expiresIn: '1h' });
+const token = jwt.sign({ foo: 'bar' }, process.env.JWT_SECRET,  { expiresIn: '1h' });
         res.status(200).send({ token })
     }
     else{
