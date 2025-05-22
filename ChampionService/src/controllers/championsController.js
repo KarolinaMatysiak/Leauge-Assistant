@@ -2,6 +2,7 @@ const { Op } = require('sequelize');
 const Champion = require('../../models/champion'); // ścieżka do modelu
 const ChampionTag = require('../../models/championTag');
 const CronJob =require('cron').CronJob;
+const { Sequelize } = require('sequelize');
 
 const job = new CronJob(
 '0 22 * * *',
@@ -42,19 +43,58 @@ async function updateChampions()
 }
 
 
-async function getChampions(req,res){
+async function getChampions(req, res) {
   try {
-    const roles = req.query.roles?.map(role => role.toLowerCase());
+    // Handle both array and single value cases
+    let roles = req.query.roles;
+    if (roles) {
+      roles = Array.isArray(roles) ? roles : [roles];
+      roles = roles.map(role => role.toLowerCase());
+    }
 
+    if (!roles || roles.length === 0) {
+      // If no roles selected, return all champions
+      let champions = await Champion.findAll({
+        include: [{
+          model: ChampionTag
+        }]
+      });
+      return res.send(champions);
+    }
+
+    // Find champions that have ALL selected roles
     let champions = await Champion.findAll({
       include: [{
         model: ChampionTag,
-        where: roles?.length ? {
+        required: true,
+        where: {
           tag: {
             [Op.in]: roles
-          }} : undefined,
+          }
+        }
+      }],
+      group: ['Champion.id'],
+      having: Sequelize.literal(`COUNT(DISTINCT "ChampionTags"."tag") = ${roles.length}`),
+      attributes: {
+        include: [
+          [Sequelize.fn('COUNT', Sequelize.col('ChampionTags.tag')), 'tagCount']
+        ]
+      }
+    });
+
+    // Get full champion data with all their tags
+    if (champions.length > 0) {
+      champions = await Champion.findAll({
+        where: {
+          id: {
+            [Op.in]: champions.map(c => c.id)
+          }
+        },
+        include: [{
+          model: ChampionTag
       }]  
     });
+    }
 
     res.send(champions);
   } catch (err) {
@@ -63,6 +103,56 @@ async function getChampions(req,res){
   }
 }
 
+async function getRandomChamp(req, res) {
+  try {
+    // Get roles from query params if they exist
+    let roles = req.query.roles;
+    if (roles) {
+      roles = Array.isArray(roles) ? roles : [roles];
+      roles = roles.map(role => role.toLowerCase());
+    }
+
+    let query = {
+      include: [{
+        model: ChampionTag
+      }]
+    };
+
+    // If roles are specified, filter by them
+    if (roles && roles.length > 0) {
+      query.include[0].required = true;
+      query.include[0].where = {
+        tag: {
+          [Op.in]: roles
+        }
+      };
+      query.group = ['Champion.id'];
+      query.having = Sequelize.literal(`COUNT(DISTINCT "ChampionTags"."tag") = ${roles.length}`);
+    }
+
+    // Get all matching champions
+    const champions = await Champion.findAll(query);
+
+    if (champions.length === 0) {
+      return res.status(404).json({
+        error: "No champions found",
+        message: "No champions found matching the selected criteria"
+      });
+    }
+
+    // Select a random champion
+    const randomIndex = Math.floor(Math.random() * champions.length);
+    const randomChampion = champions[randomIndex];
+
+    res.json(randomChampion);
+  } catch (err) {
+    console.error('Error in getRandomChamp:', err);
+    res.status(500).json({
+      error: "Server error",
+      message: "Error selecting random champion"
+    });
+  }
+}
 
 async function getLatestDDragon() {
     const versions = await fetch(
@@ -94,4 +184,4 @@ async function getLatestDDragon() {
 
 
 
-module.exports={updateChampions, getChampions}
+module.exports={updateChampions, getChampions, getRandomChamp}

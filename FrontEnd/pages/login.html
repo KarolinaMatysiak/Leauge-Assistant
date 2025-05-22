@@ -5,63 +5,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Nasza strona to proste i skuteczne narzędzie dla niezdecydowanych lub początkujących graczy League of Legends. Umożliwia losowanie bohaterów z aktualnej puli postaci dla wybranej roli, pomagając w szybkim podjęciu decyzji. Dodatkowo oferuje możliwość tworzenia własnych folderów z ulubionymi championami, dzięki czemu możesz losować wyłącznie spośród swoich faworytów. Przejrzysta, filtrowana lista bohaterów pozwala na łatwe wyszukiwanie postaci według wybranych kryteriów. Serwis automatycznie pobiera najnowszą listę dostępnych championów z gry, gwarantując zawsze aktualne dane. To idealne narzędzie dla graczy, którzy chcą urozmaicić swoje rozgrywki i odkrywać nowych bohaterów w League of Legends!">
-    <title>Champion Roulette</title>
+        content="League Assistant - A simple and effective tool for League of Legends players to browse, filter, and randomly select champions.">
+    <title>Login - League Assistant</title>
 
-    <script src="../js/main.js"></script>
     <link rel="stylesheet" href="../styles/style.css">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="../styles/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="../styles/favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="../styles/favicon.ico">
-    <link rel="manifest" href="../styles/favicon.ico">
-
+    <link rel="icon" href="../styles/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../styles/favicon.ico" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <script src="../js/login.js" defer></script>
 </head>
 
 <body>
     <div class="main-container">
-    <div class="title">   
-        <h1 class="h1">Login</h1>
-    </div>
-    <div class="navigation">
-        <nav>
-            <a href="championRoulette.html">champion roulette</a>
-            <a href="championList.html">champion list</a>
-            <a href="login.html">login</a>
-            <a href="index.html">Home Page</a>
-        </nav>
-    </div>
+        <div class="nav-bar">
+            <div class="nav-img">
+                <img src="../styles/favicon.ico" alt="League Assistant Logo">
+            </div>
 
-    <div class="content">
-
-        <div class="login">
-            <form action="" method="post">
-                <label for="email">email</label>
-                <input type="email" name="user_email" required>
-                <label for="password">password</label>
-                <input type="password" name="user_password">
-                <button type="submit">Zaloguj</button>
-            </form>
-            <div>
-                <a href="register.html">zarejestruj sie</a>
+            <div class="nav-nav">
+            <nav>
+                    <a href="championRoulette.html">
+                        <span class="btn">Champion Roulette</span>
+                    </a>
+                    <a href="championList.html">
+                        <span class="btn">Champion List</span>
+                    </a>
+                    <a href="index.html">
+                        <span class="btn">Home</span>
+                    </a>
+            </nav>
             </div>
         </div>
 
+        <div class="login-container">
+            <div class="login">
+                <form>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="user_email" required placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="user_password" required placeholder="Enter your password">
+                    </div>
+                    
+                    <button type="submit">Sign In</button>
+                </form>
+                
+                <div class="auth-links">
+                    <p>Don't have an account? <a href="register.html">Register now</a></p>
+                </div>
+            </div>
+        </div>
+
+            <footer>
+            <p class="footer">&copy; 2024 League Assistant. All rights reserved.</p>
+            </footer>
     </div>
-
-
-
-    <div class="footer">
-        <footer>
-            footer
-        </footer>
-    </div>
-    </div>
-
 </body>
-
 </html>

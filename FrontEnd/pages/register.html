@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="Nasza strona to proste i skuteczne narzędzie dla niezdecydowanych lub początkujących graczy League of Legends. Umożliwia losowanie bohaterów z aktualnej puli postaci dla wybranej roli, pomagając w szybkim podjęciu decyzji. Dodatkowo oferuje możliwość tworzenia własnych folderów z ulubionymi championami, dzięki czemu możesz losować wyłącznie spośród swoich faworytów. Przejrzysta, filtrowana lista bohaterów pozwala na łatwe wyszukiwanie postaci według wybranych kryteriów. Serwis automatycznie pobiera najnowszą listę dostępnych championów z gry, gwarantując zawsze aktualne dane. To idealne narzędzie dla graczy, którzy chcą urozmaicić swoje rozgrywki i odkrywać nowych bohaterów w League of Legends!">
-    <title>Champion Roulette</title>
+    <title>Register - Champion Roulette</title>
 
     <script src="../js/main.js"></script>
     <link rel="stylesheet" href="../styles/style.css">
@@ -16,49 +16,49 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../styles/favicon.ico">
     <link rel="manifest" href="../styles/favicon.ico">
 
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="main-container">
-    <div class="title">   
-        <h1 class="h1">Register</h1>
-    </div>
-    <div class="navigation">
-        <nav >
-            <a href="championRoulette.html">champion roulette</a>
-            <a href="championList.html">champion list</a>
-            <a href="login.html">login</a>
-            <a href="index.html">Home Page</a>
-        </nav>
-    </div>
-
-    <div class="content">
-
-        <div class="register">
-            <form action="http://localhost:3001/sign-up" method="post">
-                <label for="email">email</label>
-                <input type="email" name="email" required>
-                <label for="password">password</label>
-                <input type="password" name="password" minlength="6">
-                <button id="registerButton" type="submit">Stwórz konto</button>
-            </form>
-
+        <div class="navigation">
+            <nav>
+                <a href="championRoulette.html">Champion Roulette</a>
+                <a href="championList.html">Champion List</a>
+                <a href="login.html">Login</a>
+                <a href="index.html">Home Page</a>
+            </nav>
         </div>
 
-    </div>
+        <div class="register-container">
+            <div class="register">
+                <form action="http://localhost:3001/sign-up" method="post">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" minlength="6" required placeholder="Choose a password (min. 6 characters)">
+                    </div>
+                    
+                    <button type="submit">Register</button>
+                </form>
+                
+                <div class="auth-links">
+                    <p>Already have an account? <a href="login.html">Sign in</a></p>
+                </div>
+            </div>
+        </div>
 
-
-    <div class="footer">
-        <footer>
-            footer
-        </footer>
+        <div class="footer">
+            <footer>
+                <p>&copy; 2024 Champion Roulette. All rights reserved.</p>
+            </footer>
+        </div>
     </div>
-    </div>
-
 </body>
-
 </html>

@@ -5,68 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Nasza strona to proste i skuteczne narzędzie dla niezdecydowanych lub początkujących graczy League of Legends. Umożliwia losowanie bohaterów z aktualnej puli postaci dla wybranej roli, pomagając w szybkim podjęciu decyzji. Dodatkowo oferuje możliwość tworzenia własnych folderów z ulubionymi championami, dzięki czemu możesz losować wyłącznie spośród swoich faworytów. Przejrzysta, filtrowana lista bohaterów pozwala na łatwe wyszukiwanie postaci według wybranych kryteriów. Serwis automatycznie pobiera najnowszą listę dostępnych championów z gry, gwarantując zawsze aktualne dane. To idealne narzędzie dla graczy, którzy chcą urozmaicić swoje rozgrywki i odkrywać nowych bohaterów w League of Legends!">
-    <title>Champion Roulette</title>
+        content="League Assistant - A simple and effective tool for League of Legends players to browse, filter, and randomly select champions. Perfect for both new and experienced players looking to explore different champions and roles.">
+    <title>League Assistant - Champion Selection Made Easy</title>
 
-    <script src="../js/championList.js" async></script>
     <link rel="stylesheet" href="../styles/index.css">
+    <link rel="icon" href="../styles/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../styles/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../styles/favicon.ico" sizes="16x16 32x32">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="../styles/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="../styles/favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="../styles/favicon.ico">
-    <link rel="manifest" href="../styles/favicon.ico">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="main-container">
-      
-        
+        <nav class="nav-bar">
+            <div class="nav-links">
+                <a href="championRoulette.html" class="nav-btn">Champion Roulette</a>
+                <a href="championList.html" class="nav-btn">Champion List</a>
+            </div>
+            <a href="login.html" class="nav-btn login-btn">Login</a>
+        </nav>
 
-        <div class="main-title">
-            <h1>Leauge of Friends</h1>
-            <h2>for friends</h2>
-        </div>
+        <header class="hero">
+            <div class="hero-content">
+                <h1>League Assistant</h1>
+                <div class="subtitle-container">
+                    <p class="hero-subtitle">Your Ultimate Champion Selection Companion</p>
+                    <img src="../styles/favicon.ico" alt="League Assistant Logo" class="hero-icon" width="42" height="42">
+                </div>
+                <div class="hero-buttons">
+                    <a href="championRoulette.html" class="hero-btn">Try Champion Roulette</a>
+                    <a href="championList.html" class="hero-btn">Browse Champions</a>
+                </div>
+            </div>
+        </header>
 
-        <div class="nav-bar">
-          
-   
-                <a href="championRoulette.html">
-                    <span class="btn">Champion roulette</span>
-                </a>
-                <a href="championList.html">
-                    <span class="btn">Champion list</span>
-                </a>
-                <a href="login.html">
-                    <span class="btn">
-                        Login
-                    </span>
-                </a>
+        <main class="content">
+            <section class="features">
+                <div class="feature-card">
+                    <h2>Champion List</h2>
+                    <p>Browse and filter through all League of Legends champions. Find the perfect champion for your playstyle with comprehensive filtering system.</p>
+                </div>
+                <div class="feature-card">
+                    <h2>Champion Roulette</h2>
+                    <p>Can't decide what to play? Let roulette pick a champion for you! Filter by role to ensure you get a champion that fits your position.</p>
+                </div>
+            </section>
+        </main>
 
-          
-        </div>
-
-
-        <div class="content">
-            <p>
-                League of Friends was created as a passion project to enhance the gaming experience for the author's friends and make champion selection in League of Legends easier. It was designed for players who want a simple way to browse available champions, filter them by various criteria, and randomly select one for their game. Although League of Friends was initially a dedication to the author’s friends, the website is now available to all players looking for a convenient tool to manage their champion selection.
-
-The website features two main sections. Champion List allows users to view the full list of champions available in the game. This section includes a filtering system that helps users quickly find champions based on specific criteria, such as role or other attributes, making it easier to analyze available options and select the most suitable champion for a given game. The second section, Champion Roulette, is designed for random champion selection. Users can choose a preferred role, and the system will randomly select a champion that fits that position. This feature is particularly useful for players who are undecided about which champion to play or who want to introduce an element of randomness to their gameplay by trying out champions they wouldn’t normally pick.
-
-For logged-in users, an additional feature allows them to create custom folders with their favorite champions. This means they can randomize champion selection only from their chosen set, providing even more personalization and making the tool more tailored to individual preferences. The website also offers a user-friendly interface, ensuring smooth navigation and quick access to all features. Whether players are looking for a strategic pick or simply want to experiment with new champions, League of Friends provides a hassle-free way to explore different options.
-
-League of Friends is not just a tool but a passion project built with the community in mind. It stands as a testament to the enjoyment of playing together, making champion selection more engaging and accessible for everyone.
-            </p>
-    </div>
-   
-    <footer>
-
-        <p class="footer">
-            Copyright &copy; 2025
-        </p>
-
-    </footer>
-
+        <footer>
+            <p class="footer">&copy; 2025 League Assistant. All rights reserved.</p>
+        </footer>
     </div>
 </body>
 
