@@ -3,6 +3,7 @@ const Champion = require('../../models/champion'); // ścieżka do modelu
 const ChampionTag = require('../../models/championTag');
 const CronJob =require('cron').CronJob;
 const { Sequelize } = require('sequelize');
+const { sequelize } = require('../connections/db-connection')
 
 const job = new CronJob(
 '0 22 * * *',
@@ -105,46 +106,44 @@ async function getChampions(req, res) {
 
 async function getRandomChamp(req, res) {
   try {
-    // Get roles from query params if they exist
-    let roles = req.query.roles;
+    let roles = req.query?.roles ?? [];
     if (roles) {
       roles = Array.isArray(roles) ? roles : [roles];
       roles = roles.map(role => role.toLowerCase());
     }
 
-    let query = {
-      include: [{
-        model: ChampionTag
-      }]
-    };
-
-    // If roles are specified, filter by them
-    if (roles && roles.length > 0) {
-      query.include[0].required = true;
-      query.include[0].where = {
-        tag: {
-          [Op.in]: roles
-        }
-      };
-      query.group = ['Champion.id'];
-      query.having = Sequelize.literal(`COUNT(DISTINCT "ChampionTags"."tag") = ${roles.length}`);
+    const [randomChampion] = await sequelize.query(`
+      SELECT c.*
+      FROM champions c
+      INNER JOIN champions_tags ct ON ct.championId = c.id
+      ${roles && roles.length ? "WHERE ct.tag IN (:roles)" : ""}
+      GROUP BY c.id
+      ${roles && roles.length ? "HAVING COUNT(DISTINCT ct.tag) = :roleCount" : ""}
+      ORDER BY RANDOM()
+      LIMIT 1
+    `, {
+      replacements: {
+        roles: roles || [],
+        roleCount: roles?.length || 0
+      },
+      type: Sequelize.QueryTypes.SELECT
+    });
+    if(!randomChampion) {
+      res.status(404).json({message: "Random champion not found"})
+      return;
     }
 
-    // Get all matching champions
-    const champions = await Champion.findAll(query);
 
-    if (champions.length === 0) {
-      return res.status(404).json({
-        error: "No champions found",
-        message: "No champions found matching the selected criteria"
-      });
-    }
+    const tags = await sequelize.query(`
+      SELECT *
+      FROM champions_tags
+      WHERE championId = :championId
+    `, {
+      replacements: { championId: randomChampion.id },
+      type: Sequelize.QueryTypes.SELECT
+    });
 
-    // Select a random champion
-    const randomIndex = Math.floor(Math.random() * champions.length);
-    const randomChampion = champions[randomIndex];
-
-    res.json(randomChampion);
+    res.json({...randomChampion, ChampionTags: tags.map(tagData => ({ tag: tagData.tag})) });
   } catch (err) {
     console.error('Error in getRandomChamp:', err);
     res.status(500).json({

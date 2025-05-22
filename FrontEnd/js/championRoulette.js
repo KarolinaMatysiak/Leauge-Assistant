@@ -11,6 +11,8 @@ async function handleRoll() {
         document.getElementById(role).checked
     );
 
+    console.log('Selected roles:', selectedRoles);
+
     try {
         let url = new URL('http://localhost:3000/random-champion');
         
@@ -19,6 +21,9 @@ async function handleRoll() {
             url.searchParams.append('roles', role);
         });
         
+        console.log('Sending request to:', url.toString());
+        console.log('Auth token:', getAuthToken());
+
         const response = await fetch(url, {
             method: 'GET',
             headers: {
@@ -26,27 +31,53 @@ async function handleRoll() {
             }
         });
 
+        console.log('Response status:', response.status);
+        
         if (!response.ok) {
             if (response.status === 401) {
+                console.log('Authentication error - redirecting to login');
                 // Redirect to login with return URL
                 const returnUrl = encodeURIComponent(window.location.pathname);
                 window.location.href = `login.html?returnUrl=${returnUrl}`;
                 return;
             }
-            throw new Error(`HTTP error! status: ${response.status}`);
+            if (response.status === 404) {
+                console.log('No champions found for selected roles');
+                // Show user-friendly message when no champions found
+                const displayDiv = document.getElementById('championDisplay');
+                displayDiv.innerHTML = `
+                    <div class="champion-card" style="text-align: center; justify-content: center;">
+                        <div class="champion-info">
+                            <h3>No Champions Found</h3>
+                            <p style="color: #965b6f; margin-top: 0.5rem;">
+                                There are no champions that match all selected roles.<br>
+                                Try selecting different role combinations!
+                            </p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            const errorData = await response.json();
+            console.error('Server error response:', errorData);
+            throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.message || 'Unknown error'}`);
         }
 
-        const champion = await response.json();
-        displayChampion(champion);
+        const data = await response.json();
+        console.log('Received champion data:', data);
+        displayChampion({champion: data});
     } catch (error) {
-        console.error('Error fetching random champion:', error);
+        console.error('Detailed error:', error);
         alert('Error getting random champion. Please try again.');
     }
 }
 
 // Function to display the champion
-function displayChampion(champion) {
+function displayChampion(data) {
+    const { champion, totalMatching, selectedRoles } = data;
     const displayDiv = document.getElementById('championDisplay');
+    
     displayDiv.innerHTML = `
         <div class="champion-card">
             <div class="champion-image-container">

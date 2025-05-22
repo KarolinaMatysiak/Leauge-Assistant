@@ -54,17 +54,22 @@ async function signIn(req, res) {
   });
   if (!user) {
     res.status(400).send({message:"authentication failed"});
+    return;
   }
 
   bcrypt.compare(req.body.password, user.password, function (err, result) {
-    if (result)
-    {
-     
-const token = jwt.sign({ foo: 'bar' }, process.env.JWT_SECRET,  { expiresIn: '1h' });
-        res.status(200).send({ token })
-    }
-    else{
-        res.status(400).send({message:"authentication failed"})
+    if (result) {
+      const token = jwt.sign(
+        { 
+          userId: user.id,
+          email: user.email
+        }, 
+        process.env.JWT_SECRET,  
+        { expiresIn: '1h' }
+      );
+      res.status(200).send({ token });
+    } else {
+      res.status(400).send({message:"authentication failed"});
     }
   });
 }
