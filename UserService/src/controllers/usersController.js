@@ -74,4 +74,10 @@ async function signIn(req, res) {
   });
 }
 
-module.exports = { signUp, signIn };
+async function logout(req, res) {
+  // Since we're using JWT, we don't need to do anything on the server
+  // The client will handle removing the token
+  res.status(200).send({ message: "Logged out successfully" });
+}
+
+module.exports = { signUp, signIn, logout };

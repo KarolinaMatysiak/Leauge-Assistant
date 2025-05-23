@@ -50,6 +50,7 @@
   box-sizing: border-box;
   width: 100%;
   gap: 1rem;
+  align-items: center;
 }
 
 .title {
@@ -65,11 +66,28 @@
   align-items: center;
   justify-content: center;
   padding: 0;
+  width: 100%;
 }
 
 .footer {
+  width: 100%;
+  margin-top: auto;
+  padding: 2rem 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  color: #965b6f;
+  opacity: 0.9;
   font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0;
   margin: 0;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(173, 104, 127, 0.1);
 }
 
 body {
@@ -149,6 +167,7 @@ justify-content: center;
   padding: 1rem;
   box-sizing: border-box;
   margin: auto 0;
+  width: 100%;
 }
 
 .login,
@@ -484,19 +503,24 @@ background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 228, 
 .nav-bar {
     display: flex;
     align-items: center;
-    flex-flow: row;
     justify-content: space-between;
-    min-height: 50px;
+    min-height: 60px;
+    width: 100%;
+    position: sticky;
+    top: 1%;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 228, 235, 0.9) 100%);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(173, 104, 127, 0.15);
-    padding: 0.5rem 2rem;
+    padding: 0.7rem 1rem;
     margin-bottom: 1rem;
+    z-index: 1000;
+    box-sizing: border-box;
 }
 
 .nav-img {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     margin-left: 0.5%;
@@ -515,15 +539,26 @@ background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 228, 
 }
 
 .nav-nav {
+    flex-grow: 1;
     margin-right: 0.5%;
     font-family: "Roboto", sans-serif;
     font-size: 1.05rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-nav nav {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
 }
 
 .nav-nav a {
     color: #965b6f;
     text-decoration: none;
-    margin: 0 15px;
+    margin: 0 5px;
     padding: 0.6rem 1.2rem;
     border-radius: 8px;
     transition: all 0.3s ease;
@@ -531,9 +566,34 @@ background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 228, 
     letter-spacing: 0.5px;
     background: rgba(255, 255, 255, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
 }
 
 .nav-nav a:hover {
+    color: #fff;
+    background: linear-gradient(135deg, #ad687f 0%, #965b6f 100%);
+    box-shadow: 0 4px 15px rgba(173, 104, 127, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Make sure login and logout buttons have the same style */
+.logout-btn {
+    color: #965b6f;
+    text-decoration: none;
+    margin: 0 5px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
     color: #fff;
     background: linear-gradient(135deg, #ad687f 0%, #965b6f 100%);
     box-shadow: 0 4px 15px rgba(173, 104, 127, 0.2);
@@ -547,11 +607,6 @@ background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 228, 
     cursor: pointer;
 }
 
-footer {
-    padding: 0.5rem 0;
-    margin-top: 0.5rem;
-}
-
 .champion-info p {
     color: #965b6f;
     font-size: 1.1rem;
@@ -562,4 +617,14 @@ footer {
 
 .champion-info p br {
     margin: 0.5rem 0;
+}
+
+/* Make sure login and logout buttons have the same style in the auth-buttons container */
+.auth-buttons .nav-btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
 }
