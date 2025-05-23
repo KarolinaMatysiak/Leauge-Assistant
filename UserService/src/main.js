@@ -8,6 +8,7 @@ async function bootstrap() {
     const app = express()
     const port = 3001
     
+    //sam express sam wyciaga dane z requesta z body/formsa
      app.use(express.urlencoded({ extended: true }))
     app.use(express.json())
     app.use(cors());
@@ -17,7 +18,7 @@ async function bootstrap() {
     
     //aplikacja nasluchuje na porcie 3001
     app.listen(port, () => {
-        console.log(`Example app listening on port ${port}`)
+        console.log(`${port}`)
     })
 }
 

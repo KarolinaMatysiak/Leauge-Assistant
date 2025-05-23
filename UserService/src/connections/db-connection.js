@@ -8,9 +8,6 @@ const sequelize = new Sequelize({
   });
 
 
-
-
-
 async function initConnection(){
     try {
         await sequelize.authenticate();

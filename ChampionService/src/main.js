@@ -18,7 +18,6 @@ async function bootstrap() {
     //odpalenie funkcji i podanie aplikacji jako parametru
     championRoute.registerRoutes(app)
     
-    //aplikacja nasluchuje na porcie 3000
     app.listen(port, () => {
         console.log(`Example app listening on port ${port}`)
     })

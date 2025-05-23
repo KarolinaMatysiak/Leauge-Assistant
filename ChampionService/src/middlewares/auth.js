@@ -18,6 +18,7 @@ const authenticate = (req, res, next) => {
     }
 
     try {
+        // jwt ma bearer spacja tokena normalnie
         const token = authHeader.slice('Bearer '.length);
         
         if (!token) {
@@ -29,7 +30,7 @@ const authenticate = (req, res, next) => {
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         
-        // Add the decoded user info to the request object for potential future use
+        // dodaje zawartosc tokena do request.user
         req.user = decoded;
         
         next();

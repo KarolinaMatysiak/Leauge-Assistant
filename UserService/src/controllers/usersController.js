@@ -1,11 +1,10 @@
 const { Op } = require("sequelize");
-const User = require("../models/user"); // ścieżka do modelu
+const User = require("../models/user"); 
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 
 async function signUp(req, res) {
-  console.log(req.body);
   if (!req.body?.email) {
     res.status(400).send({ message: "email is missing" });
     return;
@@ -74,10 +73,6 @@ async function signIn(req, res) {
   });
 }
 
-async function logout(req, res) {
-  // Since we're using JWT, we don't need to do anything on the server
-  // The client will handle removing the token
-  res.status(200).send({ message: "Logged out successfully" });
-}
 
-module.exports = { signUp, signIn, logout };
+
+module.exports = { signUp, signIn };

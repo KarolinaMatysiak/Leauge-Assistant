@@ -28,7 +28,12 @@
             </div>
             <div class="auth-buttons">
                 <a href="login.html" class="nav-btn login-btn">Login</a>
-                <a href="#" class="nav-btn logout-btn" style="display: none;">Logout</a>
+                <a href="#" class="nav-btn logout-btn" style="display: none;" onClick="(
+                    function logout(){
+                        localStorage.removeItem('authToken')
+                        window.location.reload();
+                    }
+                    )()">Logout</a>
             </div>
         </nav>
 

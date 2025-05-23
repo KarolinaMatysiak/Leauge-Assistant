@@ -19,7 +19,7 @@ async function updateChampions()
 {
   try {
     const champions = await getLatestDDragon();
-
+//bierze championa z bazy danych
     for (const champ of champions) {
       const champion = await Champion.findOrCreate({
         where: { name: champ.name },
@@ -27,7 +27,7 @@ async function updateChampions()
           imgUrl: champ.image,
         }
       });
-
+//bierze do niego taga z bazy
       const insertedChampionId = champion[0]?.id;
       for (const tag of champ.tags) {
         await ChampionTag.findOrCreate({
@@ -46,7 +46,7 @@ async function updateChampions()
 
 async function getChampions(req, res) {
   try {
-    // Handle both array and single value cases
+    // zwraca roles albo zapakowuje w arraya
     let roles = req.query.roles;
     if (roles) {
       roles = Array.isArray(roles) ? roles : [roles];
@@ -54,7 +54,7 @@ async function getChampions(req, res) {
     }
 
     if (!roles || roles.length === 0) {
-      // If no roles selected, return all champions
+      // zwraca wszytskich gdy nie ma roles w query
       let champions = await Champion.findAll({
         include: [{
           model: ChampionTag
@@ -63,7 +63,7 @@ async function getChampions(req, res) {
       return res.send(champions);
     }
 
-    // Find champions that have ALL selected roles
+    // zwraca champa ktory zawiera wszystkie z wybranych roli
     let champions = await Champion.findAll({
       include: [{
         model: ChampionTag,
@@ -83,7 +83,7 @@ async function getChampions(req, res) {
       }
     });
 
-    // Get full champion data with all their tags
+    // pobiera championy z jego danymi spelniajace filtr
     if (champions.length > 0) {
       champions = await Champion.findAll({
         where: {
@@ -112,6 +112,7 @@ async function getRandomChamp(req, res) {
       roles = roles.map(role => role.toLowerCase());
     }
 
+    //pobiera championa na podstawie jego roli i ilosci rol aby potraktowac to jako and
     const [randomChampion] = await sequelize.query(`
       SELECT c.*
       FROM champions c
@@ -133,7 +134,7 @@ async function getRandomChamp(req, res) {
       return;
     }
 
-
+//wyciaga tagi do championa
     const tags = await sequelize.query(`
       SELECT *
       FROM champions_tags
